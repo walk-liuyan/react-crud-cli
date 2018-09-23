@@ -23,7 +23,7 @@ const getConfig = () => {
 }
 
 program
-  .version('0.0.1')
+  .version('0.0.4')
   // type： default namespace
   // chalk.gray('init') 加颜色
 program
@@ -123,7 +123,7 @@ program.on('--help', () => {
   console.log('  Examples:')
   console.log()
   console.log('    $ react-crud init')
-  console.log('    $ vue-make component blog')
+  console.log('    $ react-crud component blog')
 })
 
 program.parse(process.argv)
