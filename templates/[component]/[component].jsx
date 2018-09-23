@@ -95,13 +95,12 @@ class Update[name] extends Component {
         <Form>
           <FormItem
             {...formItemLayout}
-            label="标题"
+            label="[name]"
           >
             {getFieldDecorator('title', {
               initialValue: item.title,
               rules: [
-                { required: true, message: '请输入标题' },
-                { max: 38, message: '长度不超过于 38 位' },
+                { required: true, message: '' },
               ],
             })(
               <Input autoComplete="off" />,

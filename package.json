@@ -1,33 +1,35 @@
 {
-    "name": "react-crud-cli",
-    "version": "2.2.7",
-    "description": "react-crud-cli",
-    "repository": {
-      "type": "git",
-      "url": ""
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-      "url": ""
-    },
-    "bin": {
-      "react-crud": "bin/react-crud"
-    },
-    "homepage": "",
-    "dependencies": {
-      "chalk": "^2.3.0",
-      "commander": "^2.12.2",
-      "fs-extra": "^4.0.3",
-      "inquirer": "^4.0.1"
-    },
-    "main": "index.js",
-    "devDependencies": {
-      "jest": "^22.4.3"
-    },
-    "scripts": {
-      "test": "jest"
-    },
-    "preferGlobal": true
-  }
-  
+  "name": "react-crud-cli",
+  "version": "0.0.1",
+  "description": "react-crud-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walk-liuyan/react-crud-cli.git"
+  },
+  "author": "walk-liuyan",
+  "license": "ISC",
+  "bin": {
+    "react-crud": "bin/react-crud"
+  },
+  "homepage": "https://github.com/walk-liuyan/react-crud-cl#readme",
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.12.2",
+    "fs-extra": "^4.0.3",
+    "inquirer": "^4.0.1"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^22.4.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "preferGlobal": true,
+  "bugs": {
+    "url": "https://github.com/walk-liuyan/react-crud-cli/issues"
+  },
+  "keywords": [
+    "react-crud"
+  ]
+}

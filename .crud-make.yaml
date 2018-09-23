@@ -1,0 +1,17 @@
+styleType: scss
+routes:
+  directory: ./rsrc/src/index/routes
+  targetDirectoryPrefix: ""
+  stylePrefix: ""
+component:
+  directory: ./rsrc/src/index/components
+  targetDirectoryPrefix: ""
+  stylePrefix: ""
+models:
+  directory: ./rsrc/src/index/models
+  targetDirectoryPrefix: ""
+  stylePrefix: ""
+services:
+  directory: ./rsrc/src/index/services
+  targetDirectoryPrefix: ""
+  stylePrefix: ""

@@ -1,0 +1,129 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const chalk = require('chalk')
+const fs = require('fs')
+const path = require('path')
+const yaml = require('js-yaml');
+
+const {
+  createFile,
+  hasFile
+} = require('../utils/file')
+const log = require('../utils/log')
+
+let CONFIG
+
+const getConfig = () => {
+  try {
+    CONFIG = yaml.safeLoad(fs.readFileSync('./.crud-make.yaml', 'utf8'))
+  } catch (e) {
+    console.log(`- Run ${chalk.yellow('crud-make init')} first`)
+  }
+}
+
+program
+  .version('0.0.1')
+  // type： default namespace
+  // chalk.gray('init') 加颜色
+program
+  .command('init [type]')
+  .description(chalk.gray('init'))
+  .action((type = 'default') => {
+    hasFile({
+      to: `./.crud-make.yaml`
+    }).then(() => {
+      createFile({
+        from: path.resolve(__dirname, `../templates/.crud-make/${type}.yaml`),
+        to: `./.crud-make.yaml`,
+        tip: false
+      })
+    }).catch(log.cancelled)
+  })
+
+program
+  .command('component [name]')
+  .description(chalk.gray('create a CRUD component'))
+  .action((name) => {
+    if (name) {
+      getConfig()
+      if (CONFIG) {
+        COMPONENT = CONFIG.component
+        ROUTES = CONFIG.routes
+        MODELS = CONFIG.models
+        SERVICES = CONFIG.services
+      } else {
+        return
+      }
+
+      // component
+      hasFile({
+        to: `${COMPONENT.directory}/${name}`
+      }).then(() => {
+        name = `${COMPONENT.targetDirectoryPrefix}${name}`
+        let to = `${COMPONENT.directory}/${name}`
+        createFile({
+          from: path.resolve(__dirname, `../templates/[component]/[component].jsx`),
+          to: `${to}.jsx`,
+          replace: [
+            { from: 'name', to: name },
+          ]
+        })
+      }).catch(log.cancelled)
+
+      // routes
+      hasFile({
+        to: `${ROUTES.directory}/${name}`
+      }).then(() => {
+        name = `${ROUTES.targetDirectoryPrefix}${name}`
+        let to = `${ROUTES.directory}/${name}`
+        createFile({
+          from: path.resolve(__dirname, `../templates/[routes]/[routes].jsx`),
+          to: `${to}.jsx`,
+          replace: [
+            { from: 'name', to: name },
+          ]
+        })
+      }).catch(log.cancelled)
+
+      // models
+      hasFile({
+        to: `${MODELS.directory}/${name}`
+      }).then(() => {
+        name = `${MODELS.targetDirectoryPrefix}${name}`
+        let to = `${MODELS.directory}/${name}`
+        createFile({
+          from: path.resolve(__dirname, `../templates/[models]/[models].js`),
+          to: `${to}.js`,
+          replace: [
+            { from: 'name', to: name },
+          ]
+        })
+      }).catch(log.cancelled)
+
+       // services
+       hasFile({
+        to: `${SERVICES.directory}/${name}`
+      }).then(() => {
+        name = `${SERVICES.targetDirectoryPrefix}${name}`
+        let to = `${SERVICES.directory}/${name}`
+        createFile({
+          from: path.resolve(__dirname, `../templates/[services]/[services].js`),
+          to: `${to}.js`,
+          replace: [
+            { from: 'name', to: name },
+          ]
+        })
+      }).catch(log.cancelled)
+    }
+  })
+
+program.on('--help', () => {
+  console.log()
+  console.log('  Examples:')
+  console.log()
+  console.log('    $ react-crud init')
+  console.log('    $ vue-make component blog')
+})
+
+program.parse(process.argv)
